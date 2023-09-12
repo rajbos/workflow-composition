@@ -1,0 +1,22 @@
+name: Process data
+on:
+  push:
+    paths:
+      - .github/workflows/proces-data.yml
+
+jobs:
+  process-data:
+    runs-on: ubuntu-latest
+    steps:
+      -  name: Download last used-actions
+         uses: blablacar/action-download-last-artifact@v0.1.0
+         with:
+           name: used-actions
+      
+      -  name: Download last available-actions
+         uses: blablacar/action-download-last-artifact@v0.1.0
+         with:
+           name: available-actions
+
+      - run: |
+          ls -la
