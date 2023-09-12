@@ -68,6 +68,12 @@ jobs:
             # go to the next usedByChar
             $usedByChar = [char]([int]$usedByChar[0] + 1)
           }
+
+          foreach ($usedAction in $usedActionsInReusableWorkflow) {
+            $summary += "$usedByChar[$($usedAction.actionLink)]-->A[]"
+            
+            $usedByChar = [char]([int]$usedByChar[0] + 1)
+          }
           $summary += '```'
 
           # write the summary to the $GITHUB_STEP_SUMMARY file
