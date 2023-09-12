@@ -70,7 +70,7 @@ jobs:
           }
 
           foreach ($usedAction in $usedActionsInReusableWorkflow) {
-            $summary += "$usedByChar[$($usedAction.actionLink)]-->A[]"
+            $summary += "$usedByChar[$($usedAction.actionLink)]-->A[$reusableworkflow_input]"
             
             $usedByChar = [char]([int]$usedByChar[0] + 1)
           }
