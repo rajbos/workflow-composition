@@ -72,6 +72,16 @@ jobs:
           foreach ($usedAction in $usedActionsInReusableWorkflow) {
             $summary += "$usedByChar[$($usedAction.actionLink)]-->A[$reusableworkflow_input]"
             
+            # find if this is a composite action
+
+            $actionInfo = availableActions.actions | Where-Object {$_.actionLink -eq $usedAction.actionLink.Split("/")[1]}
+            if ($null -ne $actionInfo) {
+              Write-Host "Could not find action with link [$($usedAction.actionLink)]"
+            }
+            else {
+              Write-Host "Found action info [$($actionInfo.using)] and [$($actionInfo.downloadUrl)]"
+            }
+            $usedAction.actionLink
             $usedByChar = [char]([int]$usedByChar[0] + 1)
           }
           $summary += '```'
