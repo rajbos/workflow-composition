@@ -2,7 +2,7 @@ name: Process data
 on:
   push:
     paths:
-      - .github/workflows/proces-data.yml
+      - .github/workflows/process-data.yml
 
 jobs:
   process-data:
