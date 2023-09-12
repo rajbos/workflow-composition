@@ -23,7 +23,7 @@ jobs:
 
       - uses: devops-actions/load-available-actions@v2.1.14
         with: 
-          PAT: ${{ secrets.PAT }} 
+          PAT: ${{ secrets.GITHUB_TOKEN }} 
           organization: ${{ env.ORGANIZATION }}
         id: load-available-actions
 
