@@ -35,3 +35,26 @@ jobs:
 
           Write-Host "Found [$($usedReusableWorkflows.Length)] used reusable workflows"
           Write-Host "Found [$($usedActions.Length)] used actions"
+
+          # search for this reusable workflow: devops-actions/.github/.github/workflows/rw-ossf-scorecard.yml
+          $reusableworkflow_input = "devops-actions/.github/.github/workflows/rw-ossf-scorecard.yml"
+          $usedReusableWorkflow | Where-Object {$_.actionLink -eq $reusableworkflow_input}
+
+          if ($null -eq $usedReusableWorkflow) {
+            Write-Error "Cound not find used reusable workflow with name [$reusableworkflow_input]"
+            exit 1
+          }
+
+          # Show where this reusable workflow is reused in a mermaid diagram in the GITHUB_STEP_SUMMARY
+          # create array of strings to store the output
+          $summary = @()
+          $summary += "```mermaid"
+          $summary += "flowchart LR"
+          $usedByChar = "B"
+          foreach ($usedByWorkflow in $usedReusableWorkflow.workflows) {
+            $summary += "  A[$reusableworkflow_input]-->$usedByChar[$($usedByWorkflow.repo)]"
+            # go to the next usedByChar
+            $usedByChar = [char]([int]$usedByChar[0] + 1)
+          }
+
+
