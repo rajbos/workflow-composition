@@ -74,7 +74,7 @@ jobs:
             
             # find if this is a composite action
 
-            $actionInfo = availableActions.actions | Where-Object {$_.actionLink -eq $usedAction.actionLink.Split("/")[1]}
+            $actionInfo = $availableActions.actions | Where-Object {$_.actionLink -eq $usedAction.actionLink.Split("/")[1]}
             if ($null -ne $actionInfo) {
               Write-Host "Could not find action with link [$($usedAction.actionLink)]"
             }
