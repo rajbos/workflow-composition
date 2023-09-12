@@ -1,0 +1,17 @@
+on:
+  push:
+    paths:
+      - .github/workflows/gather-data.yml
+
+env:
+  ORGANIZATION: devops-actions
+
+jobs:
+  gather-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: devops-actions/load-used-actions@v1.3.4
+        with:
+          PAT: ${{ secrets.GITHUB_TOKEN }}
+          organization: ${{ env.ORGANIZATION }}
+        
