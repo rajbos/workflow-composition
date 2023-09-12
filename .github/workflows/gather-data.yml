@@ -1,3 +1,4 @@
+name: Gather data
 on:
   push:
     paths:
