@@ -28,11 +28,10 @@ jobs:
           Write-Host "Found [$($availableActions.workflows.Length)] available reusable workflows"
 
           $usedActionsInfo = Get-Content "used-actions.json" | ConvertFrom-Json
-          Write-Host "Used actions: $($usedActionsInfo | ConvertTo-Json)"
           Write-Host "Found [$($usedActionsInfo.actions.Length)] available actions and reusable workflows"
 
           $usedReusableWorkflows = $usedActionsInfo | Where-Object {$_.type -eq "reusable workflow"}
           $usedActions = $usedActionsInfo | Where-Object {$_.type -eq "action"}
 
-          Write-Host "Found [$(usedReusableWorkflows.Length)] used reusable workflows"
-          Write-Host "Found [$(usedActions.Length)] used actions"
+          Write-Host "Found [$($usedReusableWorkflows.Length)] used reusable workflows"
+          Write-Host "Found [$($usedActions.Length)] used actions"
