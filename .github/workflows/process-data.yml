@@ -20,3 +20,8 @@ jobs:
 
       - run: |
           ls -la
+
+      - shell: pwsh
+        run: |
+          $usedActions = Get-Content "available-actions.json" | ConvertFrom-Json
+          Write-Host $usedActions | ConvertFrom-Json
