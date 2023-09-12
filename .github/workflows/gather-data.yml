@@ -21,7 +21,7 @@ jobs:
           name: used-actions
           path: ${{ steps.load-used-actions.outputs.actions-file }}
 
-      - uses: devops-actions/devops-actions/load-available-actions@v2.1.14
+      - uses: devops-actions/load-available-actions@v2.1.14
         with: 
           PAT: ${{ secrets.PAT }} 
           organization: ${{ env.ORGANIZATION }}
