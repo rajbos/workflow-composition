@@ -36,9 +36,9 @@ jobs:
           Write-Host "Found [$($usedReusableWorkflows.Length)] used reusable workflows"
           Write-Host "Found [$($usedActions.Length)] used actions"
 
-          # search for this reusable workflow: devops-actions/.github/.github/workflows/rw-ossf-scorecard.yml
+          # search for this reusable workflow:
           $reusableworkflow_input = "devops-actions/.github/.github/workflows/rw-ossf-scorecard.yml"
-          $usedReusableWorkflow | Where-Object {$_.actionLink -eq $reusableworkflow_input}
+          $usedReusableWorkflow = $usedReusableWorkflows | Where-Object {$_.actionLink -eq $reusableworkflow_input}
 
           if ($null -eq $usedReusableWorkflow) {
             Write-Error "Cound not find used reusable workflow with name [$reusableworkflow_input]"
@@ -56,5 +56,8 @@ jobs:
             # go to the next usedByChar
             $usedByChar = [char]([int]$usedByChar[0] + 1)
           }
+
+          # write the summary to the $GITHUB_STEP_SUMMARY file
+          Set-Content -Path $env:GITHUB_STEP_SUMMARY -Value $summary
 
 
