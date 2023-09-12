@@ -28,6 +28,6 @@ jobs:
           Write-Host "Found [$($availableActions.workflows.Length)] available reusable workflows"
 
           $usedActions = Get-Content "used-actions.json" | ConvertFrom-Json
-          Write-Host "Used actions: $usedActions"
+          Write-Host "Used actions: $($usedActions | ConvertTo-Json)"
           Write-Host "Found [$($usedActions.actions.Length)] available actions"
           Write-Host "Found [$($usedActions.workflows.Length)] available reusable workflows"
