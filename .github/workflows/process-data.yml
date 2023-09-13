@@ -9,31 +9,31 @@ jobs:
   process-data:
     runs-on: ubuntu-latest
     steps:
-      -  name: Download last used-actions
-         uses: blablacar/action-download-last-artifact@v0.1.0
-         with:
-           name: used-actions
+      # get the code to run the pwsh script
+      - uses: actions/checkout@v3
+
+      - name: Download last used-actions
+        uses: blablacar/action-download-last-artifact@v0.1.0
+        with:
+          name: used-actions
       
-      -  name: Download last available-actions
-         uses: blablacar/action-download-last-artifact@v0.1.0
-         with:
-           name: available-actions
+      - name: Download last available-actions
+        uses: blablacar/action-download-last-artifact@v0.1.0
+        with:
+          name: available-actions
 
       - run: |
           $pwd
           ls -la
-
-      - uses: actions/checkout@v3
 
       - shell: pwsh
         run: |
           $pwd
           ls -la
 
-          cd ..
-          ls -la
-          
           Write-Host "GITHUB_WORKSPACE: [$($env:GITHUB_WORKSPACE)]"
-          .$env:GITHUB_WORKSPACE/github/workflows/script.ps1
+          . ./github/workflows/script.ps1
+
+          main -availableActionsFile "actions.json" -usedActionsFile "used-actions.json"
 
 
