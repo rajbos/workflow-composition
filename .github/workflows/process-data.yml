@@ -26,6 +26,7 @@ jobs:
 
       - shell: pwsh
         run: |
-          . github/workflows/script.ps1
+          $pwd
+          . /github/workflows/script.ps1
 
 
