@@ -4,7 +4,7 @@ function main {
         [string]$availableActionsFile,
 
         [Parameter(Mandatory = $true)]
-        [string]$usedActionsFile,
+        [string]$usedActionsFile
     )
 
     Write-Host "Running script.ps1 with parameters:"
