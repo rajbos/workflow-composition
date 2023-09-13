@@ -28,6 +28,6 @@ jobs:
         run: |
           $pwd
           ls -la
-          . /.github/workflows/script.ps1
+          .github/workflows/script.ps1
 
 
