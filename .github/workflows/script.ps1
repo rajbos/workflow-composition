@@ -41,9 +41,9 @@ function main {
 
     # search for the actions used in the reusable workflow
     $usedActionsInReusableWorkflow = $usedActions | Where-Object {$_.workflows | Where-Object {$_.repo -eq $reusableworkflow_input_owner_repo -And $_.workflowFileName -eq $reusableworkflow_input_workflowname}}
-    Write-Host "Found [$($usedActionsInReusableWorkflow.Length)] used actions in the reusable workflow [$reusableworkflow_input]"
-    foreach ($usedAction in $usedActionsInReusableWorkflow) {
-    Write-Host "  - [$($usedAction.actionLink)]"
+        Write-Host "Found [$($usedActionsInReusableWorkflow.Length)] used actions in the reusable workflow [$reusableworkflow_input]"
+        foreach ($usedAction in $usedActionsInReusableWorkflow) {
+        Write-Host "  - [$($usedAction.actionLink)]"
     }
 
     # Show where this reusable workflow is reused in a mermaid diagram in the GITHUB_STEP_SUMMARY
@@ -53,26 +53,26 @@ function main {
     $summary += "flowchart LR"
     $usedByChar = "B"
     foreach ($usedByWorkflow in $usedReusableWorkflow.workflows) {
-    $summary += "  A[$reusableworkflow_input]-->$usedByChar[$($usedByWorkflow.repo)]"
-    # go to the next usedByChar
-    $usedByChar = [char]([int]$usedByChar[0] + 1)
+        $summary += "  A[$reusableworkflow_input]-->$usedByChar[$($usedByWorkflow.repo)]"
+        # go to the next usedByChar
+        $usedByChar = [char]([int]$usedByChar[0] + 1)
     }
 
     foreach ($usedAction in $usedActionsInReusableWorkflow) {
-    $summary += "  $usedByChar[$($usedAction.actionLink)]-->A[$reusableworkflow_input]"
+        $summary += "  $usedByChar[$($usedAction.actionLink)]-->A[$reusableworkflow_input]"
 
-    # find if this is a composite action
-
-    $actionInfo = $availableActions.actions | Where-Object {$_.actionLink -eq $usedAction.actionLink.Split("/")[1]}
-    if ($null -ne $actionInfo) {
-        Write-Host "Could not find action with link [$($usedAction.actionLink)]"
-    }
-    else {
-        Write-Host "Found action info [$($actionInfo.using)] and [$($actionInfo.downloadUrl)]"
-    }
-    $usedAction.actionLink
-    $usedByChar = [char]([int]$usedByChar[0] + 1)
-    }
+        # find if this is a composite action
+        $actionInfo = $availableActions.actions | Where-Object {$_.actionLink -eq $usedAction.actionLink.Split("/")[1]}
+        if ($null -ne $actionInfo) {
+            Write-Host "Could not find action with link [$($usedAction.actionLink)]"
+        }
+        else {
+            # if this action is not from the current org, then we do no have the action info
+            Write-Host "Found action info [$($actionInfo.using)] and [$($actionInfo.downloadUrl)]"
+        }
+        $usedAction.actionLink
+        $usedByChar = [char]([int]$usedByChar[0] + 1)
+    }s
     $summary += '```'
 
     # write the summary to the $GITHUB_STEP_SUMMARY file

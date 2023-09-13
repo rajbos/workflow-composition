@@ -1,0 +1,10 @@
+{
+    "name": "PowerShell",
+    "image": "mcr.microsoft.com/vscode/devcontainers/powershell:0-7",
+    "extensions": [
+      "ms-vscode.powershell"
+    ],
+    "settings": {
+      "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+    }
+  }
