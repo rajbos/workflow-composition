@@ -70,7 +70,7 @@ jobs:
           }
 
           foreach ($usedAction in $usedActionsInReusableWorkflow) {
-            $summary += "$usedByChar[$($usedAction.actionLink)]-->A[$reusableworkflow_input]"
+            $summary += "  $usedByChar[$($usedAction.actionLink)]-->A[$reusableworkflow_input]"
             
             # find if this is a composite action
 
