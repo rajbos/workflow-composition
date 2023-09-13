@@ -32,7 +32,7 @@ jobs:
           ls -la
 
           Write-Host "GITHUB_WORKSPACE: [$($env:GITHUB_WORKSPACE)]"
-          . ./github/workflows/script.ps1
+          . .github/workflows/script.ps1
 
           main -availableActionsFile "actions.json" -usedActionsFile "used-actions.json"
 
