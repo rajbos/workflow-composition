@@ -29,7 +29,11 @@ jobs:
         run: |
           $pwd
           ls -la
+
+          cd ..
+          ls -la
+          
           Write-Host "GITHUB_WORKSPACE: [$($env:GITHUB_WORKSPACE)]"
-          .github/workflows/script.ps1
+          .$env:GITHUB_WORKSPACE/github/workflows/script.ps1
 
 
